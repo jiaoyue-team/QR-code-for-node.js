@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">QR Code 生成器</h1>
+            <p class="subtitle">掃描以在手機上開啟此網頁</p>
+        </header>
+        
+        <div class="qrcode-wrapper">
+            <!-- Loading indicator before QR code is generated -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+            </div>
+            <div id="qrcode"></div>
+        </div>
+
+        <div class="url-container">
+            <input type="text" id="url-input" readonly>
+            <button id="download-btn" title="下載 QR Code">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </button>
+            <button id="copy-btn" title="複製網址">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+        </div>
+
+        <div class="settings-container">
+            <label class="checkbox-label">
+                <input type="checkbox" id="transparent-bg">
+                <span class="checkmark"></span>
+                使用透明背景 (下載用)
+            </label>
+        </div>
+        
+        <div id="toast" class="toast">已複製網址！</div>
+    </div>
+    
+    <script src="qrcode.min.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html>

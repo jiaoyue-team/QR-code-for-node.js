@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "QR犬(插件版)",
+  "version": "1.0",
+  "description": "一鍵將當前網頁轉換為 QR Code",
+  "permissions": [
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "生成 QR Code"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
