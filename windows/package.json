@@ -1,0 +1,55 @@
+{
+  "name": "qr-code-generator",
+  "version": "1.5.2",
+  "description": "QR Code 產生器桌面應用程式",
+  "author": "Developer",
+  "main": "main.js",
+  "scripts": {
+    "start": "node launcher.js",
+    "dev": "electron .",
+    "build": "electron-builder --win",
+    "build:portable": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.qrcode.generator",
+    "productName": "QR 狗",
+    "publish": null,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer.js",
+      "styles.css",
+      "package.json",
+      "icons/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icons/icon-256x256.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "QR 狗"
+    },
+    "portable": {
+      "artifactName": "QR 狗-Portable.exe"
+    }
+  },
+  "dependencies": {
+    "@simonwep/pickr": "^1.10.1",
+    "jimp": "^1.6.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^24.13.3"
+  }
+}

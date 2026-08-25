@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR 狗</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="node_modules/@simonwep/pickr/dist/themes/nano.min.css">
+</head>
+<body>
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>⬡ QR 狗</h1>
+      <p>輸入連結，即時產生精美的 QR Code</p>
+    </div>
+
+    <div class="main-layout">
+      <!-- Left Panel: Controls -->
+      <div class="left-panel">
+        <!-- URL Input Card -->
+        <div class="card">
+          <label class="label" for="url-input">輸入連結</label>
+          <div class="input-wrapper">
+            <span class="icon">🔗</span>
+            <input
+              type="text"
+              id="url-input"
+              class="url-input"
+              placeholder="https://example.com"
+              spellcheck="false"
+              autocomplete="off"
+            >
+          </div>
+        </div>
+
+        <!-- Settings Card -->
+        <div class="card">
+          <label class="label">設定</label>
+
+          <!-- Row: Transparent Toggle + Format Select -->
+      <div class="settings-row">
+        <div class="toggle-group">
+          <span class="toggle-label">透明背景</span>
+          <label class="toggle">
+            <input type="checkbox" id="transparent-toggle">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="select-group">
+          <span class="select-label">格式</span>
+          <div class="select-wrapper">
+            <select id="format-select" class="format-select">
+              <option value="png">PNG</option>
+              <option value="jpg">JPG</option>
+              <option value="webp">WEBP</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row: Size Select -->
+      <div class="settings-row" style="margin-top: 14px;">
+        <div class="select-group" style="width: 100%;">
+          <span class="select-label">下載尺寸</span>
+          <div class="select-wrapper" style="flex: 1;">
+            <select id="size-select" class="format-select" style="width: 100%;">
+              <option value="400">400 x 400 px</option>
+              <option value="800" selected>800 x 800 px</option>
+              <option value="1200">1200 x 1200 px</option>
+              <option value="custom">自訂尺寸 (1:1)</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+          <input type="number" id="custom-size-input" class="format-select hidden" style="width: 100px; padding: 8px 14px;" placeholder="輸入像素" min="200" max="4000">
+        </div>
+      </div>
+
+      <!-- Appearance & Style -->
+      <div class="settings-row" style="margin-top: 14px;">
+        <div class="select-group" style="width: 100%;">
+          <span class="select-label">熱門配色</span>
+          <div class="select-wrapper" style="flex: 1;">
+            <select id="theme-select" class="format-select" style="width: 100%;">
+              <option value="default">預設 (黑白)</option>
+              <option value="cyberpunk">賽博龐克 (紫黑)</option>
+              <option value="sunset">夕陽橘紅</option>
+              <option value="ocean">深海藍綠</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-row" style="margin-top: 10px;">
+        <div class="select-group" style="width: 100%;">
+          <span class="select-label">碼點樣式</span>
+          <div class="select-wrapper" style="flex: 1;">
+            <select id="dots-style-select" class="format-select" style="width: 100%;">
+              <option value="square">方形 (預設)</option>
+              <option value="dots">圓形</option>
+              <option value="rounded">圓角方形</option>
+              <option value="classy">液體融合</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-row" style="margin-top: 10px;">
+        <div class="select-group" style="width: 100%;">
+          <span class="select-label">定位角樣式</span>
+          <div class="select-wrapper" style="flex: 1;">
+            <select id="corners-style-select" class="format-select" style="width: 100%;">
+              <option value="square">方形 (預設)</option>
+              <option value="dot">圓形</option>
+              <option value="extra-rounded">全圓角</option>
+              <option value="leaf">葉片狀</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Color Pickers -->
+          <div class="color-pickers-section">
+            <!-- Background color (hidden when transparent) -->
+            <div class="color-row" id="bg-color-row">
+              <span class="color-row-label">背景顏色</span>
+              <div class="color-row-control">
+                <div id="bg-color-picker"></div>
+                <span class="color-hex" id="bg-color-hex">#1a1a2e</span>
+              </div>
+            </div>
+
+            <!-- QR Code foreground color -->
+            <div class="color-row">
+              <span class="color-row-label">QR Code 顏色</span>
+              <div class="color-row-control">
+                <div id="qr-color-picker"></div>
+                <span class="color-hex" id="qr-color-hex">#ffffff</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logo Upload -->
+          <div class="logo-upload-section">
+            <div class="logo-upload-control">
+              <label for="logo-upload" class="logo-upload-btn">
+                <span class="logo-btn-icon">📷</span>
+                <span class="logo-btn-text">加入圖片</span>
+              </label>
+              <input type="file" id="logo-upload" accept="image/png, image/jpeg, image/webp" style="display: none;">
+              <button id="logo-clear" class="logo-clear-btn hidden" title="移除圖片">✖</button>
+            </div>
+            <div class="hint" id="logo-hint" style="margin-top: 5px;">
+              已選擇圖片：<span id="logo-filename"></span>
+            </div>
+          </div>
+
+          <!-- Hints -->
+          <div class="hint" id="transparent-hint">
+            ⓘ 透明背景已啟用，強制使用 PNG 格式
+          </div>
+          <div class="hint hint-warning" id="color-warning">
+            ⚠ 背景顏色與 QR Code 顏色過於接近，可能難以辨識！
+          </div>
+          <div class="hint hint-warning" id="image-warning">
+            ⚠ 將圖片作為 QR Code 可能導致對比度不足，造成掃描失敗！
+          </div>
+          <div class="hint hint-error" id="size-warning">
+            ⛔ 嚴重警告：自訂尺寸過小（需大於 200），將導致 QR Code 模糊無法掃描！
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Preview -->
+      <div class="right-panel">
+        <!-- QR Code Preview -->
+        <div class="preview-section">
+          <div class="qr-preview" id="qr-preview">
+            <div class="qr-placeholder" id="qr-placeholder">
+              <span class="placeholder-icon">⬡</span>
+              <span>輸入連結以產生 QR Code</span>
+            </div>
+            <img id="qr-image" style="display: none;" alt="QR Code">
+          </div>
+          
+          <!-- Download Button inside Right Panel -->
+          <button class="download-btn round-btn" id="download-btn" disabled title="下載 QR Code">
+            ⬇
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="status" id="status"></div>
+    
+    <!-- Hidden Canvas for Rendering -->
+    <canvas id="qr-canvas" class="hidden"></canvas>
+  </div>
+
+  <script src="node_modules/@simonwep/pickr/dist/pickr.min.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
