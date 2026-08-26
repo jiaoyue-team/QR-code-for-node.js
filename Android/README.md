@@ -1,6 +1,6 @@
-# QR狗 (QR Dog) - 手機版 QR Code 生成與掃描器 🐶📱
+# QR狗 (QR Dog) - 手機版 QR Code 專屬生成器 🐶📱
 
-一個現代化、功能全面且支援離線運作的 Android QR Code 應用程式。
+一個現代化、功能全面、免相機權限且支援完全離線運作的 Android QR Code 生成應用程式。
 
 ---
 
